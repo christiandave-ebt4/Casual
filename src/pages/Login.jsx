@@ -39,7 +39,7 @@ function Login() {
 
         <button
           onClick={handleLogin}
-          className="w-full bg-burgundy-100 text-white py-2 rounded-lg hover:bg-burgundy-200 transition-colors font-semibold bg-rose-950"
+          className="w-full  text-white py-2 rounded-lg hover:bg-burgundy-200 transition-colors font-semibold bg-rose-950"
         >
           Login
         </button>
