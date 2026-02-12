@@ -3,14 +3,14 @@ import PinInput from "../components/PinInput";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const length = 4;
+  const length = 6;
 
   const [pin, setPin] = useState(Array(length).fill(""));
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const CORRECT_PIN = "1234"; // your passcode
+  const CORRECT_PIN = "031125"; // your passcode
 
   const handleLogin = () => {
     const enteredPin = pin.join("");
@@ -39,7 +39,7 @@ function Login() {
 
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+          className="w-full bg-burgundy-100 text-white py-2 rounded-lg hover:bg-burgundy-200 transition-colors font-semibold bg-rose-950"
         >
           Login
         </button>
