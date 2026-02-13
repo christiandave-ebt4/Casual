@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Valentine from "./pages/Valentine.jsx";
+import Valentine from "./pages/valentine.jsx";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
 import Memories from "./pages/Memories.jsx";
