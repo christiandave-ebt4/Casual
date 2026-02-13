@@ -5,3 +5,13 @@ body{
     background-color: #f3e6eb;
     color: #5c142a;
 }
+
+.intro-splash {
+  animation: splashFade 0.9s ease forwards;
+}
+
+@keyframes splashFade {
+  0% { opacity: 1; transform: scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.02); }
+}

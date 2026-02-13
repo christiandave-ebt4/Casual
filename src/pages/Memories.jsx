@@ -1,12 +1,13 @@
 import TopNav from "../layouts/TopNav";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const memories = [
   {
     id: "first-date",
     title: "Our first date",
     note: "The day everything felt easy.",
+    message: "Our very first date and I felt so inlove with you.",
     date: "Nov 30, 2024",
     imageSrc: "/memories/1st date.jpg",
   },
@@ -14,6 +15,7 @@ const memories = [
     id: "cookies",
     title: "Baking together",
     note: "Peaceful day for us.",
+    message: "If feels like we're in our own house doing things together.",
     date: "Nov 15, 2025",
     imageSrc: "/memories/cookies.jpg",
   },
@@ -21,6 +23,7 @@ const memories = [
     id: "graduation",
     title: "Best day of my life!",
     note: "You saw me.",
+    message: "I'm very grateful that you're here with me.",
     date: "Jun 7, 2025",
     imageSrc: "/memories/Graduation day.jpg",
   },
@@ -28,6 +31,7 @@ const memories = [
     id: "roblox",
     title: "Roblox Together",
     note: "Spending some time with you in a Game",
+    message: "Spending time with you even when we're not together.",
     date: "Sept 29, 2025",
     imageSrc: "/memories/roblox.jpeg",
   },
@@ -35,6 +39,7 @@ const memories = [
     id: "married",
     title: "We're Married!",
     note: "A day to remember",
+    message: "We will make this happen.",
     date: "Aug 1, 2025",
     imageSrc: "/memories/we're married.jpg",
   },
@@ -42,6 +47,7 @@ const memories = [
     id: "kny",
     title: "You watched my fav anime",
     note: "The little things that you do.",
+    message: "I love you",
     date: "Sept 1, 2025",
     imageSrc: "/memories/kny.jpg",
   },
@@ -106,7 +112,7 @@ function MemoryCard({ memory }) {
           className="w-full h-full rounded-2xl shadow-md ring-1 ring-burgundy-200/60 bg-rose-950 p-6 text-white flex flex-col items-center justify-center absolute top-0 left-0"
         >
           <p className="text-center text-base font-semibold leading-relaxed">
-            {memory.note}
+            {memory.message}
           </p>
           <p className="mt-4 text-xs text-burgundy-100">Click to flip back</p>
         </div>
@@ -116,9 +122,23 @@ function MemoryCard({ memory }) {
 }
 
 export default function Memories() {
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.2;
+      audioRef.current.play().catch((error) => {
+        console.log("Audio playback failed:", error);
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-burgundy-50 via-burgundy-100 to-burgundy-200 font-elegant text-burgundy-800">
       <TopNav />
+
+      {/* Background audio */}
+      <audio ref={audioRef} src="/audio/daylight.mp3" loop preload="auto" />
 
       <main className="mx-auto max-w-5xl px-6 py-12">
         {/* Hero */}

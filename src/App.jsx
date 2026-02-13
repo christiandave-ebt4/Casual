@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Valentine from "./pages/Valentine.jsx";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
 import Memories from "./pages/Memories.jsx";
@@ -9,7 +10,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Valentine />} />
+        <Route path="/login" element={<Login />} />
         <Route
           path="/home"
           element={

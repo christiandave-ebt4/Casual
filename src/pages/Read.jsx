@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Read() {
   const audioRef = useRef(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentLetter, setCurrentLetter] = useState(0);
 
   useEffect(() => {
-    // Play audio when component mounts
     if (audioRef.current) {
+      audioRef.current.volume = 0.2;
       audioRef.current.play().catch((error) => {
         console.log("Audio playback failed:", error);
       });
@@ -16,50 +16,48 @@ export default function Read() {
 
   const letterContent = [
     {
+      id: "letter-1",
       title: "To My Love",
       content: `Hi baby,
 
-Time flies so fast, right? It's already our second Valentine's Day together, and our anniversary is coming up soon. I just want to say, happy Valentine's Day, my baby.
+Time flies so fast, right? It’s already our second Valentine’s Day together, and our anniversary is coming up soon. I just want to say, happy Valentine’s Day, my baby.
 
-I'm so happy that I get to celebrate this special day with you, and I'm truly grateful that we met back in November. Our journey hasn't been easy this past year, but even when things were hard, we still chose each other. We chose to stay, to grow, and to become stronger every day — not just for our relationship, but for our dreams too.
+I’m so happy that I get to celebrate this special day with you, and I’m truly grateful that we met back in November. Our journey hasn’t been easy this past year, but even when things were hard, we still chose each other. We chose to stay, to grow, and to become stronger every day, not just for our relationship, but for our dreams too.
 
-I can't fully put into words what I feel. All I can say is that I'm very thankful that God brought you into my life.`,
+I can’t fully put into words what I feel. All I can say is that I’m very thankful that God brought you into my life. I hope this lasts forever. I promise to do my best to keep you, to love you the right way, and to become someone worthy of the love you give me, someone you will always choose.
+
+I will always be your safe place, the one who listens, the one who understands you, even during the times when it’s hard for you to understand yourself.
+
+I love you so much.
+
+— Yours`,
     },
     {
-      title: "To My Love",
-      content: `I hope this lasts forever. I promise to do my best to keep you, to love you the right way, and to become someone worthy of the love you give me — someone you will always choose.
+      id: "letter-2",
+      title: "Appreaciation for my Lovey",
+      content: `Baby,
 
-I will always be your safe place, the one who listens, the one who understands you — even during the times when it's hard for you to understand yourself.
+I just want you to read this letter as a small appreciation for everything you’ve done for me and for us. Sometimes I don’t say it enough, but I truly see the effort you put into our relationship. I see how you try your best to make us happy, how you stay patient even when things get difficult, and how you always find ways to make us stronger.
 
-I love you so much, and I can't wait for all the memories we'll create together. Every moment with you is a blessing, and I'm grateful for your patience, your kindness, and your unwavering love.
+I really appreciate everything you do, even the little things that might seem small. The way you listen to me, the way you support me, the way you choose to understand instead of giving up, all of those mean so much to me. You don’t always realize how much your actions affect me, but they make me feel loved, secure, and valued.
 
-Thank you for choosing me, every single day.`,
+This past year hasn’t always been easy, but what I admire most is how we never stopped choosing each other. Even when we face misunderstandings or challenges, we still try. We still talk. We still fix things. And that’s something I’m very proud of — us choosing to grow instead of walking away.
+
+I hope we continue building the future we always talk about. The happy, peaceful, and successful life we dream of together. I don’t just hope we last — I want us to keep becoming better for each other, to keep improving, and to keep protecting what we have.
+
+Thank you for loving me the way you do. Thank you for believing in us. I’m grateful every day that I get to call you mine, and I’m looking forward to all the Valentine’s Days, anniversaries, and milestones we’ll celebrate in the future.
+
+I love you, always.
+
+— Yours`,
     },
   ];
-
-  const handleNextPage = () => {
-    if (currentPage < letterContent.length) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-burgundy-50 via-burgundy-100 to-burgundy-200 font-elegant text-burgundy-800">
       <TopNav />
 
-      {/* Background audio */}
-      <audio
-        ref={audioRef}
-        src="/background-song.mp3"
-        loop
-        preload="auto"
-      />
+      <audio ref={audioRef} src="/audio/understand.mp3" loop preload="auto" />
 
       <main className="mx-auto max-w-5xl px-6 py-12">
         <section className="relative overflow-hidden rounded-3xl bg-white/70 p-10 shadow-xl ring-1 ring-burgundy-200/60">
@@ -75,60 +73,43 @@ Thank you for choosing me, every single day.`,
               {/* Book cover */}
               <div className="relative rounded-2xl bg-rose-950 p-6 text-white shadow-2xl">
                 <div className="absolute left-0 top-0 h-full w-2 bg-burgundy-900/50" />
-                <div className="text-xs uppercase tracking-[0.2em] text-burgundy-100">
-                  Chapter 1
-                </div>
+
                 <h1 className="mt-2 text-3xl font-bold">Our Letters</h1>
                 <p className="mt-3 text-burgundy-100">
                   A place for the words I never want to forget.
                 </p>
-                <div className="mt-6 rounded-xl bg-white/10 p-4 text-sm text-burgundy-100">
-                  I love you
+
+                <div className="mt-6 grid gap-3">
+                  <button
+                    onClick={() => setCurrentLetter(0)}
+                    className="w-full rounded-xl bg-white/10 p-3 text-left text-sm text-burgundy-100 transition hover:bg-white/20"
+                  >
+                    I love you
+                  </button>
+                  <button
+                    onClick={() => setCurrentLetter(1)}
+                    className="w-full rounded-xl bg-white/10 p-3 text-left text-sm text-burgundy-100 transition hover:bg-white/20"
+                  >
+                    Another letter
+                  </button>
                 </div>
               </div>
 
               {/* Notebook pages */}
               <div className="relative overflow-hidden rounded-2xl bg-white/90 p-6 shadow-lg ring-1 ring-burgundy-200/60">
-                {/* Lined paper + margin */}
-                <div className="rounded-xl bg-[linear-gradient(transparent_27px,rgba(164,63,86,0.18)_28px)] bg-[length:100%_28px] px-4 py-4 h-96 overflow-y-auto">
+                <div className="rounded-xl bg-[linear-gradient(transparent_27px,rgba(164,63,86,0.18)_28px)] bg-[length:100%_28px] px-4 py-6 min-h-[520px]">
                   <div className="mb-3 flex items-center justify-between border-b border-burgundy-200 pb-2">
                     <h2 className="text-2xl font-semibold">
-                      {letterContent[currentPage - 1].title}
+                      {letterContent[currentLetter].title}
                     </h2>
                     <span className="text-xs uppercase tracking-widest text-burgundy-400">
-                      page {currentPage}
+                      letter {currentLetter + 1}
                     </span>
                   </div>
 
                   <div className="space-y-4 leading-7 text-burgundy-700 whitespace-pre-line">
-                    <p>{letterContent[currentPage - 1].content}</p>
-                    {currentPage === letterContent.length && (
-                      <p className="pt-2 font-semibold">— Yours</p>
-                    )}
+                    <p>{letterContent[currentLetter].content}</p>
                   </div>
-                </div>
-
-                {/* Navigation buttons */}
-                <div className="mt-4 flex items-center justify-between">
-                  <button
-                    onClick={handlePrevPage}
-                    disabled={currentPage === 1}
-                    className="rounded-full bg-burgundy-200 px-4 py-2 text-burgundy-700 disabled:opacity-50 disabled:cursor-not-allowed transition hover:bg-burgundy-300"
-                  >
-                    ← Previous
-                  </button>
-
-                  <span className="text-sm text-burgundy-600">
-                    {currentPage} / {letterContent.length}
-                  </span>
-
-                  <button
-                    onClick={handleNextPage}
-                    disabled={currentPage === letterContent.length}
-                    className="rounded-full bg-rose-950 px-4 py-2 text-white disabled:opacity-50 disabled:cursor-not-allowed transition hover:bg-burgundy-800"
-                  >
-                    Next →
-                  </button>
                 </div>
               </div>
             </div>
